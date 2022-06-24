@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dashboard/screens/constants.dart';
 
 import 'components/header.dart';
+import 'components/my_fields.dart';
 import 'components/storage_details.dart';
 
 class DashboardScreen extends StatelessWidget {
@@ -19,13 +20,11 @@ class DashboardScreen extends StatelessWidget {
             const SizedBox(height: defaultPadding),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
+              // ignore: prefer_const_literals_to_create_immutables
               children: [
-                Expanded(
+                const Expanded(
                   flex: 5,
-                  child: Container(
-                    height: 500,
-                    color: Colors.white,
-                  ),
+                  child: MyFields(),
                 ),
                 const SizedBox(width: defaultPadding),
                 const Expanded(
