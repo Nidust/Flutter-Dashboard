@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dashboard/controllers/menu_controller.dart';
 import 'package:provider/provider.dart';
 
+import '../dashboard/dashboard_screen.dart';
 import 'components/side_menu.dart';
 
 class MainScreen extends StatelessWidget {
@@ -22,9 +23,7 @@ class MainScreen extends StatelessWidget {
             Expanded(
               // It takes 5/6 part of the screen
               flex: 5,
-              child: Container(
-                color: Colors.blue,
-                )
+              child: DashboardScreen()
             )
           ]
         ),

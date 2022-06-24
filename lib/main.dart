@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dashboard/controllers/menu_controller.dart';
+import 'package:flutter_dashboard/screens/constants.dart';
 import 'package:flutter_dashboard/screens/main/main_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -18,10 +19,10 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData.dark().copyWith(
-        scaffoldBackgroundColor: const Color(0xFF212332),
+        scaffoldBackgroundColor: bgColor,
         textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme)
           .apply(bodyColor: Colors.white),
-        canvasColor: const Color(0xFF2A2D3E)
+        canvasColor: secondaryColor
       ),
       home: MultiProvider(
         providers: [
