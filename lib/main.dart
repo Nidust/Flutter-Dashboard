@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(
             create: (context) => MenuController())
         ],
-        child: MainScreen(),
+        child: const MainScreen(),
       ),
     );
   }
