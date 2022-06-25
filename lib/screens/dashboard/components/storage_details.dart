@@ -45,7 +45,7 @@ class StorageDetails extends StatelessWidget {
           const StorageInfoCard(
             title: "Other Files",
             iconSource: "assets/icons/folder.svg",
-            amountOfFiles: ".3GB",
+            amountOfFiles: "1.3GB",
             numOfFiles: 1328,
           ),
           const StorageInfoCard(

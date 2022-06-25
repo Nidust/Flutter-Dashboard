@@ -19,17 +19,22 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData.dark().copyWith(
-        scaffoldBackgroundColor: bgColor,
-        textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme)
-          .apply(bodyColor: Colors.white),
-        canvasColor: secondaryColor
-      ),
+          scaffoldBackgroundColor: bgColor,
+          textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme)
+              .apply(bodyColor: Colors.white),
+          canvasColor: secondaryColor),
       home: MultiProvider(
         providers: [
-          ChangeNotifierProvider(
-            create: (context) => MenuController())
+          ChangeNotifierProvider(create: (context) => MenuController())
         ],
-        child: const MainScreen(),
+        child: MultiProvider(
+          providers: [
+            ChangeNotifierProvider(
+              create: (context) => MenuController(),
+            )
+          ],
+          child: const MainScreen(),
+        ),
       ),
     );
   }

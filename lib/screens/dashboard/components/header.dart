@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dashboard/controllers/menu_controller.dart';
+import 'package:flutter_dashboard/responsive.dart';
 import 'package:flutter_dashboard/screens/constants.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 
 class Header extends StatelessWidget {
   const Header({
@@ -11,14 +14,16 @@ class Header extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Text(
-          "Dashboard", 
-          style: Theme.of(context).textTheme.headline6
-        ),
-        const Spacer(flex: 2),
-        const Expanded(
-          child: SearchField()
-        ),
+        if (Responsive.isDesktop(context) == false)
+          IconButton(
+            icon: const Icon(Icons.menu),
+            onPressed: context.read<MenuController>().controlMenu,
+          ),
+        if (Responsive.isMobile(context) == false)
+          Text("Dashboard", style: Theme.of(context).textTheme.headline6),
+        if (Responsive.isMobile(context) == false)
+          Spacer(flex: Responsive.isDesktop(context) ? 2 : 1),
+        const Expanded(child: SearchField()),
         const ProfileCard()
       ],
     );
@@ -33,18 +38,13 @@ class ProfileCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(
-        left: defaultPadding
-      ),
+      margin: const EdgeInsets.only(left: defaultPadding),
       padding: const EdgeInsets.symmetric(
-        horizontal: defaultPadding,
-        vertical: defaultPadding / 2
-      ),
+          horizontal: defaultPadding, vertical: defaultPadding / 2),
       decoration: BoxDecoration(
-        color: secondaryColor,
-        borderRadius: const BorderRadius.all(Radius.circular(10)),
-        border: Border.all(color: Colors.white10)
-      ),
+          color: secondaryColor,
+          borderRadius: const BorderRadius.all(Radius.circular(10)),
+          border: Border.all(color: Colors.white10)),
       child: Row(
         children: [
           Image.asset(
@@ -52,12 +52,8 @@ class ProfileCard extends StatelessWidget {
             height: 38,
           ),
           const Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: defaultPadding / 2
-            ),
-            child: Text(
-              "Angelina Joli"
-            ),
+            padding: EdgeInsets.symmetric(horizontal: defaultPadding / 2),
+            child: Text("Angelina Joli"),
           ),
           const Icon(Icons.keyboard_arrow_down),
         ],
@@ -75,28 +71,24 @@ class SearchField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextField(
       decoration: InputDecoration(
-        hintText: "Search",
-        fillColor: secondaryColor, 
-        filled: true,
-        border: const OutlineInputBorder(
-          borderSide: BorderSide.none,
-          borderRadius: BorderRadius.all(Radius.circular(10)) 
-        ),
-        suffixIcon: InkWell(
-          onTap: () => {},
-          child: Container(
-            padding: const EdgeInsets.all(defaultPadding * 0.75),
-            margin: const EdgeInsets.symmetric(
-              horizontal: defaultPadding /2
+          hintText: "Search",
+          fillColor: secondaryColor,
+          filled: true,
+          border: const OutlineInputBorder(
+              borderSide: BorderSide.none,
+              borderRadius: BorderRadius.all(Radius.circular(10))),
+          suffixIcon: InkWell(
+            onTap: () => {},
+            child: Container(
+              padding: const EdgeInsets.all(defaultPadding * 0.75),
+              margin:
+                  const EdgeInsets.symmetric(horizontal: defaultPadding / 2),
+              decoration: const BoxDecoration(
+                  color: primaryColor,
+                  borderRadius: BorderRadius.all(Radius.circular(10))),
+              child: SvgPicture.asset("assets/icons/search.svg"),
             ),
-            decoration: const BoxDecoration(
-              color: primaryColor,
-              borderRadius: BorderRadius.all(Radius.circular(10)) 
-            ),
-            child: SvgPicture.asset("assets/icons/search.svg"),
-          ),
-        )
-      ),
+          )),
     );
   }
 }

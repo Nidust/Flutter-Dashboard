@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dashboard/responsive.dart';
 import 'package:flutter_dashboard/screens/constants.dart';
 
 import 'components/header.dart';
@@ -26,18 +27,25 @@ class DashboardScreen extends StatelessWidget {
                 Expanded(
                   flex: 5,
                   child: Column(
-                    children: const [
-                      MyFields(),
-                      SizedBox(height: defaultPadding),
-                      RecentFiles(),
+                    children: [
+                      const MyFields(),
+                      const SizedBox(height: defaultPadding),
+                      const RecentFiles(),
+                      if (Responsive.isMobile(context))
+                        const SizedBox(height: defaultPadding),
+                      if (Responsive.isMobile(context)) const StorageDetails(),
                     ],
                   ),
                 ),
-                const SizedBox(width: defaultPadding),
-                const Expanded(
-                  flex: 2,
-                  child: StorageDetails(),
-                ),
+
+                if (Responsive.isMobile(context) == false)
+                  const SizedBox(width: defaultPadding),
+                // On Mobile means if the screen less than 850. we dont want show it
+                if (Responsive.isMobile(context) == false)
+                  const Expanded(
+                    flex: 2,
+                    child: StorageDetails(),
+                  ),
               ],
             )
           ],
